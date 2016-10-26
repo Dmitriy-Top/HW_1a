@@ -1,15 +1,13 @@
 package calculator;
-import static calculator.Result.*;
-/**
- * Created by admin on 26.10.2016.
- */
-public class Calculator {
+import static calculator.Decorator.*;
+
+ class Calculator {
     private double a;
     private double b;
     private String operator;
-    String result;
+    private String result;
 
-    public Calculator(String[] args) {
+    Calculator(String[] args) {
         this.operator = args[1];
         try {
             this.a = Double.parseDouble(args[0]);

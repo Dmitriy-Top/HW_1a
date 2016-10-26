@@ -1,9 +1,6 @@
 package calculator;
 
-/**
- * Created by admin on 26.10.2016.
- */
-public class Help {
+class Help {
     private static void showHelp(){
         System.out.println("*****************************");
         System.out.println("*Программа: Калькулятор     *");
@@ -17,10 +14,10 @@ public class Help {
 
     }
 
-    public Help() {
+    Help() {
         showHelp();
     }
-    public Help(int err) {
+    Help(int err) {
         System.out.println("Ошибка:");
         if (err==1) System.out.println("Аргумент не являеться числом\n");
         if (err==2) System.out.println("На ноль делить нельзя\n");
