@@ -2,20 +2,20 @@ package calculator;
 import static calculator.Decorator.*;
 
  class Calculator {
-    private double a;
-    private double b;
+    private double a; //используем тип double, так-как он дает наиболее полные возможности для
+    private double b; //математических вычислений (точное деление, наибольший диапазон значений)
     private String operator;
     private String result;
 
     Calculator(String[] args) {
         this.operator = args[1];
-        try {
+        try { //парсим значения и проверяем на другие ошибки
             this.a = Double.parseDouble(args[0]);
             this.b = Double.parseDouble(args[2]);
-            if (this.b == 0& operator.equals("/")) throw new ArithmeticException();
-            this.calc();
+            if (this.b == 0& operator.equals("/")) throw new ArithmeticException(); //решаем проблему double / 0 = infinity
+            this.calc(); //если все нормально делаем расчет
         } catch(NumberFormatException e){
-            new Help(1);
+            new Help(1); //сообщаем об ошибке
         } catch (ArithmeticException e){
             new Help(2);
         }
