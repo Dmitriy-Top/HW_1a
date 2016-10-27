@@ -1,4 +1,7 @@
 package calculator;
+import calculator.strategys.*;
+import calculator.strategys.Error;
+
 import static calculator.Decorator.*;
 
  class Calculator {
@@ -21,26 +24,27 @@ import static calculator.Decorator.*;
         }
     }
     private void calc(){
+        Strategy strategy;
         switch (operator){
             case "+":
-                result = (a+" + "+b+" = "+ doubleDecorate(a+b));
-                resultDecorate(result);
+                strategy = new Plus();
                 break;
             case "-":
-                result = (a+" - "+b+" = "+ doubleDecorate(a-b));
-                resultDecorate(result);
+                strategy = new Minus();
                 break;
             case "x":
-                result = (a+" x "+b+" = "+ doubleDecorate(a*b));
-                resultDecorate(result);
+                strategy = new Multiplication();
                 break;
             case "/":
-                result = (a+" / "+b+" = "+ doubleDecorate(a/b));
-                resultDecorate(result);
+                strategy = new Division();
                 break;
-            default: new Help(3);
+            default:
+                strategy = new Error();
                 break;
         }
+        result = strategy.execute(a,b);
+        if(result!=null)resultDecorate(result);
         }
+
 
     }

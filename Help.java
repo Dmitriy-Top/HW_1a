@@ -1,6 +1,6 @@
 package calculator;
 
-class Help {
+public class Help {
     private static void showHelp(){
         System.out.println("*****************************");
         System.out.println("*Программа: Калькулятор     *");
@@ -14,10 +14,10 @@ class Help {
 
     }
 
-    Help() {
+    public Help() {
         showHelp();
     }
-    Help(int err) {
+    public Help(int err) {
         System.out.println("Ошибка:");
         if (err==1) System.out.println("Аргумент не являеться числом\n");
         if (err==2) System.out.println("На ноль делить нельзя\n");
