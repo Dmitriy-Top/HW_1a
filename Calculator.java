@@ -1,4 +1,8 @@
 package calculator;
+import calculator.Exception.ArgumentsParseException;
+import calculator.Exception.ArithmeticOperationsException;
+import calculator.Exception.CalcException;
+import calculator.Exception.DivisionByZero;
 import calculator.strategys.*;
 import calculator.strategys.Error;
 
@@ -10,7 +14,7 @@ import static calculator.Decorator.*;
     private String operator;
     private String result;
 
-    Calculator(String[] args) {
+    Calculator(String[] args) throws CalcException {
         this.operator = args[1];
         try { //парсим значения и проверяем на другие ошибки
             this.a = Double.parseDouble(args[0]);
@@ -18,12 +22,12 @@ import static calculator.Decorator.*;
             if (this.b == 0& operator.equals("/")) throw new ArithmeticException(); //решаем проблему double / 0 = infinity
             this.calc(); //если все нормально делаем расчет
         } catch(NumberFormatException e){
-            new Help(1); //сообщаем об ошибке
+            throw new ArgumentsParseException();
         } catch (ArithmeticException e){
-            new Help(2);
+            throw new DivisionByZero();
         }
     }
-    private void calc(){
+    private void calc() throws CalcException {
         Strategy strategy;
         switch (operator){
             case "+":
@@ -39,11 +43,14 @@ import static calculator.Decorator.*;
                 strategy = new Division();
                 break;
             default:
-                strategy = new Error();
-                break;
+                throw new ArithmeticOperationsException();
         }
         result = strategy.execute(a,b);
-        if(result!=null)resultDecorate(result);
+        if(result!=null){
+            resultDecorate(result);
+        } else{
+            throw new CalcException();
+        }
         }
 
 
